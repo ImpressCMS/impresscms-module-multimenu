@@ -1,0 +1,64 @@
+/* common styling */
+
+
+.menuvcss {font-family: arial, sans-serif; 
+	position:relative; 
+	font-size:12px; 
+	}
+	
+.menuvcss ul li a, .menuvcss ul li a:visited {
+	display:block; 
+	text-decoration:none; 
+	height:20px; 
+	text-align:center; 
+	color:#fff; 
+	border:1px solid #aaa; 
+	background:#710069; /*Hintergrundfarbe des menüs*/
+	line-height:20px; 
+	font-size:11px; 
+	overflow:hidden; 
+	}
+	
+.menuvcss ul {padding:0; 
+	margin:0;
+	list-style-type: none; 
+	}
+	
+.menuvcss ul li {float:left; 
+	margin: 0 !important; 
+	position:relative; 
+	list-style: none !important;
+	} /*!important ist wichtig weil sonst <li> margin und list-style aus der style.css des themes übernommen wird*/
+	
+.menuvcss ul li ul {display: none;
+	}
+
+/* specific to non IE browsers */
+.menuvcss ul li:hover a {color:#fff; background:#36f;}
+.menuvcss ul li:hover ul {display:block; position:absolute; top:0;}
+.menuvcss ul li:hover ul li a.hide {background:#6a3; color:#fff;}
+.menuvcss ul li:hover ul li:hover a.hide {background:#6fc; color:#000;}
+.menuvcss ul li:hover ul li ul {display: none;}
+.menuvcss ul li:hover ul li a {display:block; background:#eee; color:#000;}
+.menuvcss ul li:hover ul li a:hover {background:#6fc; color:#000;}
+.menuvcss ul li:hover ul li:hover ul {display:block; position:absolute; left:105px; top:0;}
+
+.menuvcss ul li:hover a.cat {
+background:#ffffff; 
+color:red;
+}
+
+.menuvcss ul li:hover a.cat:hover{
+background:#ffffff; 
+color:blue;
+}
+
+.menuvcss ul li:hover a.note {
+background:#ffffff; 
+color:green;
+}
+
+.menuvcss ul li:hover a.note:hover {
+background:#ffffff; 
+color:blue;
+}

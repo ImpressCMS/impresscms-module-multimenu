@@ -1,0 +1,86 @@
+<!-- Thanks to http://www.stunicholls.myby.co.uk/ for this pure css menuvcss ! -->
+
+<table><tr><td>
+
+<link rel="stylesheet" type="text/css" href="<{$xoops_url}>/modules/multiMenu/script/09/flyout.css" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" media="all" type="text/css" href="<{$xoops_url}>/modules/multiMenu/script/09/flyout_ie.css" />
+
+<style type="text/css">
+
+.menuvcss ul li a:hover ul {left:<{if $block.block_size > 0}><{$block.block_size-8}>px;<{else}><{$block.block_size}>px;<{/if}> width:<{if $block.block_size > 0}><{$block.block_size}>px;<{else}><{$block.block_size*-1}>px;<{/if}>}
+.menuvcss ul li a:hover ul li a:hover ul {left:<{$block.block_size}>px;}
+.menuvcss {height:10px;}
+
+</style>
+
+
+<![endif]-->
+
+<style type="text/css">
+*>.menuvcss {width:<{if $block.block_size > 0}><{$block.block_size}>px;<{else}><{$block.block_size*-1}>px;<{/if}>}
+*>.menuvcss ul li a, .menuvcss ul li a:visited {width:<{if $block.block_size > 0}><{$block.block_size-1}>px;<{else}><{$block.block_size*-1}>px;<{/if}>}
+*>.menuvcss ul li:hover ul {left:<{if $block.block_size > 0}><{$block.block_size-1}>px;<{else}><{$block.block_size-4}>px;<{/if}> width:<{if $block.block_size > 0}><{$block.block_size}>px;<{else}><{$block.block_size*-1}>px;<{/if}>}
+*>.menuvcss ul li a:hover ul {left:<{$block.block_size}>px; width:<{if $block.block_size > 0}><{$block.block_size}>px;<{else}><{$block.block_size*-1}>px;<{/if}>}
+*>.menuvcss ul li:hover ul li:hover ul {left:<{$block.block_size}>px;}
+
+
+</style>
+
+<div class="menuvcss">
+<!-- Start multiMenu <{$block.mm}> -->
+<{assign var=ul_main value=0}>
+<{assign var=ul_sec  value=0}>
+
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0}>
+<{if $ul_sec == 1}></ul><{assign var=ul_sec value=0}><{/if}>
+	<{if $ul_sec == 1}><{assign var=ul_sec value=0}><{/if}>
+		<{if $ul_main == 1}>
+			<!--[if lte IE 6]>
+			</td></tr></table>
+			</a>
+			<![endif]-->
+			</li>
+			</ul>
+			<{assign var=ul_main value=0}>
+		<{/if}>
+		<{if $ul_main == 0}>
+			<{assign var=ul_main value=1}>
+		<{/if}>
+
+		<ul>
+		<li>
+		<a class="hide" href="<{$imenu.linkurl}>" title="<{$imenu.alt_title}>"><{$imenu.image}>&nbsp;<{$imenu.title}></a>
+		<!--[if lte IE 6]>
+		<a href="<{$imenu.linkurl}>" title="<{$imenu.alt_title}>"><{$imenu.image}>&nbsp;<{$imenu.title}>
+		<table><tr><td>
+		<![endif]-->
+
+<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+		<{if $ul_sec == 0}><ul><{assign var=ul_sec value=1}><{/if}>
+		<li><a href="<{$imenu.linkurl}>" title="<{$imenu.alt_title}>"><{$imenu.image}>&nbsp;<{$imenu.title}></a></li>
+
+<{elseif $imenu.submenu == 3}>
+		<{if $ul_sec == 0}><ul><{assign var=ul_sec value=1}><{/if}>
+		<div><li><a class="note" href="<{$imenu.linkurl}>" title="<{$imenu.alt_title}>"><{$imenu.image}>&nbsp;<{$imenu.title}></a></li></div>
+
+<{elseif $imenu.submenu == 4}>
+		<{if $ul_sec == 0}><ul><{assign var=ul_sec value=1}><{/if}>
+		<div><li><a class="cat" href="<{$imenu.linkurl}>" title="<{$imenu.alt_title}>"><{$imenu.image}>&nbsp;<{$imenu.title}></a></li></div>
+
+<{/if}>
+<{/foreach}>
+
+	<{if $ul_main == 1 OR $ul_sec == 1}>
+	<!--[if lte IE 6]>
+	</td></tr></table>
+	</a>
+	<![endif]-->
+	</li>
+	</ul>
+	<{/if}>
+
+</td></tr></table> 
+<!-- End multiMenu <{$block.mm}> -->
+</div>

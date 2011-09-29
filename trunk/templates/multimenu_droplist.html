@@ -1,0 +1,91 @@
+<!-- Start multiMenu <{$block.mm}> -->
+<script type="text/javascript" language="JavaScript">
+<!--
+function Go(x) {
+   location.href = x;
+   document.forms[0].reset();
+   document.forms[0].elements[0].blur();
+
+}
+//-->
+</script>
+
+<{assign var=td value=-1}>
+<{assign var=top value="nocat"}>
+
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+<div align="center">
+<{foreach item=imenu from=$block.contents}>
+
+<{if $imenu.submenu == 0 AND $top == "nocat"}>
+	<{if $block.format == "droplist"}>
+		<form action="">
+		<select size="1" name="multimenu<{$block.mm}>" 
+	<{else}>
+		<form action="" method="post">
+		<select size="<{$block.marquee_height}>" name="multimenu<{$block.mm}>" 
+	<{/if}>
+			onchange="Go(multimenu<{$block.mm}>.options[multimenu<{$block.mm}>.options.selectedIndex].value)">
+		<option value="" selected="selected">
+		<!-- Enter default message here -->
+		<{section name=spacer loop=$block.block_size}><{"&nbsp;"}><{/section}>
+		<!-- End of default message here -->
+		</option>
+<{assign var=top value="0"}>
+<{/if}>
+
+<{if $imenu.submenu == 4}>
+	<{if $top == "1"}>
+		</select>
+		</form>
+	<{/if}>
+	<{assign var=td value=$td+1}>
+	<{assign var=top value="0"}>
+	<{if $td >= $block.columns_limit_drop}>
+		</div>
+		</td>
+		<td width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<div align="center">
+		<{assign var=td value=0}>
+	<{/if}>
+
+<h3><{$imenu.link}><{if $imenu.image}><{$imenu.image}><br /><{/if}><{$imenu.title}><{$imenu.a}></h3>
+
+	<{if $block.format == "droplist"}>
+		<form action="">
+		<select size="1" name="multimenu<{$block.mm}>" 
+	<{else}>
+		<form action="" method="post">
+		<select size="<{$block.marquee_height}>" name="multimenu<{$block.mm}>" 
+	<{/if}>
+			onchange="Go(multimenu<{$block.mm}>.options[multimenu<{$block.mm}>.options.selectedIndex].value)">
+		<option value="" selected="selected">
+		<!-- Enter default message here -->
+		<{section name=spacer loop=$block.block_size}><{"&nbsp;"}><{/section}>
+		<!-- End of default message here -->
+		</option>
+<{elseif $imenu.submenu == 3}>
+	<{if $top == "1"}>
+		</select>
+		</form>
+	<{/if}>
+		<{$imenu.link}><{$imenu.image}><{$imenu.title}><{$imenu.a}>
+		<{assign var=top value="nocat"}>
+<{else}>
+	<{assign var=top value="1"}>
+	<option value="<{if $imenu.linkurl}><{$imenu.linkurl}><{else}>#<{/if}>">
+	<{if $imenu.submenu != "0"}>- - <{/if}><{$imenu.title}>
+	</option>
+<{/if}>
+<{/foreach}>
+	<{if $top == "1"}>
+		</select>
+		</form>
+	<{/if}>
+</div>
+</td>
+</tr>
+</table>
+<!-- End multiMenu <{$block.mm}> -->

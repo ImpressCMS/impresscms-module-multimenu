@@ -1,0 +1,180 @@
+<!-- Start multiMenu <{$block.mm}> -->
+
+<link rel="stylesheet" type="text/css" href="<{$xoops_url}>/modules/multiMenu/script/06/style/mm_context2.css" title="Context2" />
+<script type="text/javascript" src="<{$xoops_url}>/modules/multiMenu/script/start.js"></script>
+<script type="text/javascript" src="<{$xoops_url}>/modules/multiMenu/script/06/jsdomenuc.js"></script>
+
+
+<style type="text/css">
+<{counter start=0 print=false}>
+<{assign var=count value=1}>
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0 OR $imenu.submenu == 3 OR $imenu.submenu == 4}>
+<{counter assign=menu print=false}>
+<{if $imenu.image}>
+<{assign var=count value=$count+1}>
+
+.iconpc<{$block.mm}><{$menu}> {
+	background-image: url(<{$imenu.imageurl}>);
+	background-repeat: no-repeat; /* Do not alter this line! */
+	height: 16px;
+	left: 4px;
+	position: absolute; /* Do not alter this line! */
+	width: 16px; 
+}
+
+<{/if}>
+<{/if}>
+<{/foreach}>
+
+<{counter start=0 print=false}>
+<{assign var=count value=1}>
+<{assign var=count2 value=1}>
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0 OR $imenu.submenu == 3 OR $imenu.submenu == 4}>
+<{counter assign=menu print=false}>
+<{assign var=count value=1}>
+<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+<{if $count == 1}>
+<{assign var=count2 value=$count2+1}>
+<{/if}>
+<{if $imenu.image}>
+<{assign var=sublink.$menu value=1}>
+.iconsc<{$block.mm}><{$menu}><{$count}> {
+	background-image: url(<{$imenu.imageurl}>);
+	background-repeat: no-repeat; /* Do not alter this line! */
+	height: 16px;
+	left: 4px;
+	position: absolute; /* Do not alter this line! */
+	width: 16px;
+}
+<{/if}>
+<{assign var=count value=$count+1}>
+<{/if}>
+<{/foreach}>
+
+</style>
+
+<!-- Start multiMenu <{$block.mm}> -->
+<script language="JavaScript" type="text/javascript">
+function createjsDOMenuc() {
+cursorMenuc<{$block.mm}> = new jsDOMenuc(<{$block.block_size}>);
+with (cursorMenuc<{$block.mm}>) {
+<{counter start=0 print=false}>
+<{assign var=count value=1}>
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0 OR $imenu.submenu == 3 OR $imenu.submenu == 4}>
+<{counter assign=menu print=false}>
+<{if $imenu.submenu == 3}>
+
+<{if $imenu.linkurl}>
+addMenuItem(new menuItem3("<{$imenu.title}>", "pc<{$block.mm}><{$menu}>", "code:window.open('<{$imenu.linkurl}>','<{$imenu.target_context}>');"));
+<{else}>
+addMenuItem(new menuItem3b("<{$imenu.title}>", "pc<{$block.mm}><{$menu}>"));
+<{/if}>
+
+<{elseif $imenu.submenu == 4}>
+<{if $imenu.linkurl}>
+addMenuItem(new menuItem4("<{$imenu.title}>", "pc<{$block.mm}><{$menu}>", "code:window.open('<{$imenu.linkurl}>','<{$imenu.target_context}>');"));
+<{else}>
+addMenuItem(new menuItem4b("<{$imenu.title}>", "pc<{$block.mm}><{$menu}>"));
+<{/if}>
+
+<{elseif $imenu.title == "{sep}"}>addMenuItem(new menuItem("<hr />"));
+
+<{else}>
+<{if $imenu.linkurl}>
+addMenuItem(new menuItem("<{$imenu.title}>", "pc<{$block.mm}><{$menu}>", "code:window.open('<{$imenu.linkurl}>','<{$imenu.target_context}>');"));
+<{else}>
+addMenuItem(new menuItemb("<{$imenu.title}>", "pc<{$block.mm}><{$menu}>"));
+<{/if}>
+<{/if}>
+
+<{/if}>
+<{/foreach}>
+}
+<{counter start=0 print=false}>
+<{assign var=count value=1}>
+<{assign var=count2 value=1}>
+<{assign var=is_sub value=0}>
+
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0 OR $imenu.submenu == 3 OR $imenu.submenu == 4}>
+<{if $is_sub == 1}>}
+<{/if}> 
+<{assign var=is_sub value=0}>
+<{counter assign=menu print=false}>
+<{assign var=count value=1}>
+<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+<{if $count == 1}>
+cursorMenuc<{$block.mm}>_<{$count2}> = new jsDOMenuc(<{$block.block_size}>); 
+with (cursorMenuc<{$block.mm}>_<{$count2}>) { 
+<{assign var=count2 value=$count2+1}>
+<{/if}>
+<{assign var=sublink.$menu value=1}>
+<{if $imenu.linkurl}>
+addMenuItem(new menuItem("<{$imenu.title}>", "sc<{$block.mm}><{$menu}><{$count}>", "code:window.open('<{$imenu.linkurl}>','<{$imenu.target_context}>');"));
+<{else}>
+addMenuItem(new menuItemb("<{$imenu.title}>", "sc<{$block.mm}><{$menu}><{$count}>"));
+<{/if}>
+<{assign var=count value=$count+1}>
+<{assign var=is_sub value=1}>
+<{/if}>
+<{/foreach}>
+<{if $imenu.submenu == 1 OR $imenu.submenu == 2}>}<{/if}> 
+
+<{counter start=0 print=false}>
+<{assign var=count value=1}>
+<{assign var=count2 value=1}>
+
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0 OR $imenu.submenu == 3 OR $imenu.submenu == 4}>
+<{counter assign=menu print=false}>
+<{assign var=count value=1}>
+<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+<{if $count == 1}>
+<{assign var=count2 value=$count2+1}>
+<{/if}>
+<{assign var=sublink.$menu value=1}>	
+<{if $count == 1}> 
+cursorMenuc<{$block.mm}>.items.pc<{$block.mm}><{$menu}>.setSubMenu(cursorMenuc<{$block.mm}>_<{$count2-1}>);
+<{/if}>
+<{assign var=count value=$count+1}>
+<{/if}>
+<{/foreach}>
+
+<{counter start=0 print=false}>
+<{assign var=count value=1}>
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0 OR $imenu.submenu == 3 OR $imenu.submenu == 4}>
+<{counter assign=menu print=false}>
+<{if $imenu.image}>
+cursorMenuc<{$block.mm}>.items.pc<{$block.mm}><{$menu}>.showIcon("iconpc<{$block.mm}><{$menu}>", "iconpc<{$block.mm}><{$menu}>");
+<{assign var=count value=$count+1}>
+<{/if}>
+<{/if}>
+<{/foreach}>
+
+<{counter start=0 print=false}>
+<{assign var=count value=1}>
+<{assign var=count2 value=1}>
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0 OR $imenu.submenu == 3 OR $imenu.submenu == 4}>
+<{counter assign=menu print=false}>
+<{assign var=count value=1}>
+<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+<{if $count == 1}>
+<{assign var=count2 value=$count2+1}>
+<{/if}>
+<{assign var=sublink.$menu value=1}>	
+<{if $imenu.image}>
+cursorMenuc<{$block.mm}>_<{$count2-1}>.items.sc<{$block.mm}><{$menu}><{$count}>.showIcon("iconsc<{$block.mm}><{$menu}><{$count}>", "iconsc<{$block.mm}><{$menu}><{$count}>");
+<{/if}><{assign var=count value=$count+1}>
+<{/if}>
+<{/foreach}>
+
+setPopUpMenuc(cursorMenuc<{$block.mm}>);
+activatePopUpMenuByc(1, 2);
+}
+</script>
+<!-- End multiMenu <{$block.mm}> -->

@@ -1,0 +1,6 @@
+compresseur de source javascript 
+Rapide :
+http://www.creativyst.com/Prod/3/
+
+Compresse mieux (par contre tres long):
+http://www.brainjar.com/js/crunch/demo.html

@@ -1,0 +1,58 @@
+.click-menu {
+    width: 160px;
+}
+
+.click-menu .box1 {
+    cursor: default;
+}
+.click-menu .box1-hover {
+    cursor:hand; 
+}
+.click-menu .box1-open {
+    cursor: default;
+}
+.click-menu .box1-open-hover {
+    cursor:hand; 
+}
+
+/* start smiley */
+.click-menu .lnk1 {
+    cursor: default;
+    position: relative;
+}
+.click-menu .lnk1 a {
+    cursor:hand;
+}
+.click-menu .lnk1-hover {
+    cursor: default;
+}
+.click-menu .lnk1-hover a {
+     cursor:hand; 
+}
+.click-menu .lnk1 a {
+}
+.click-menu .lnk1 a:hover {
+    cursor:hand; 
+}
+/* end smiley */
+
+.click-menu .box1 img, .click-menu .box1-hover img, .click-menu .box1-open img, .click-menu .box1-open-hover img, .click-menu .lnk1 img, .click-menu .lnk1-hover img {
+    position: relative;
+}
+.click-menu .section {
+    display: none;
+}
+.click-menu .section a {
+}
+.click-menu .section a:hover {
+}
+
+.click-menu .box2 {
+}
+
+.click-menu .box2-hover {
+}
+
+.click-menu .section .active,
+.click-menu .section .active:hover {
+}

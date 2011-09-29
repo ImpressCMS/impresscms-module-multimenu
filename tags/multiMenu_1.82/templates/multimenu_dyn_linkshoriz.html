@@ -1,0 +1,44 @@
+<!-- Start multiMenu <{$block.mm}> -->
+<table height="<{$block.marquee_height}>" border="1"><tr><td>
+<div id="navcontainer">
+<ul>
+
+<{counter start=0 print=false}>
+<{counter assign=count print=false}>
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0}>
+<!-- To display separator id needed
+<{if $count > 1}> | <{/if}>
+-->
+	<li style='list-style: none; margin: -3px; display: inline; '>
+	<a href="<{$imenu.linkurl}>" onMouseover="showit(<{$count}>)" <{$imenu.target}>title="<{$imenu.alt_title}>" style='padding: 3px 0.5em; margin-top: 0px; border: 1px outset #778; background: #DDE;'><{$imenu.image}><{$imenu.title}></a></li>
+<{counter assign=count print=false}>
+<{/if}>
+<{/foreach}>
+</nobr>
+</ul>
+</td>
+</tr>
+<td>
+<!-- Edit the dimensions of the below, plus background color-->
+<ilayer height="32" name="dep1" bgColor="#E6E6FF">
+<layer name="dep2" height="32">
+</layer>
+</ilayer>
+<div id="describe" style="height:32px" onMouseover="clear_delayhide()" onMouseout="resetit(event)"></div>
+
+
+<script language="JavaScript" type="text/javascript">
+var submenu=new Array()
+
+//Set submenu contents. Expand as needed. For each content, make sure everything exists on ONE LINE. Otherwise, there will be JS errors.
+
+<{counter start=0 print=false}>
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0}><{counter assign=count print=false}><{if $count > 1}>'<{/if}>
+
+	submenu[<{$count}>]='<{/if }><{if $imenu.submenu == 1 OR $imenu.submenu == 2}>[<a href="<{$imenu.linkurl}> <{$imenu.target}>title="<{$imenu.alt_title}>"><{$imenu.image}><{$imenu.title}></a>]<{/if}><{/foreach}>'
+</script>
+<script language="JavaScript" type="text/javascript" src="<{$xoops_url}>/modules/multiMenu/script/04/menu.js"></script>
+</td></tr></table>
+<!-- Start multiMenu <{$block.mm}> -->

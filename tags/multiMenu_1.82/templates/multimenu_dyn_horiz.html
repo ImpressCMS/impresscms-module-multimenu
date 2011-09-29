@@ -1,0 +1,154 @@
+<!-- Start multiMenu <{$block.mm}> -->
+
+<!--[if gte IE 5.5]>
+<iframe id="dropmenuiframe<{$block.mm}>" src="" style="z-index:99;display:none;position:absolute;"></iframe>
+<![endif]-->
+
+<style type="text/css">
+
+#dropmenudiv<{$block.mm}>{
+position:absolute;
+margin-left:18px;
+margin-top:0px;
+border: 1px solid black;
+border-bottom-width: 0;
+background: #021946;
+}
+
+#dropmenudiv<{$block.mm}> a{
+width: <{$block.block_size}>px;
+display: block;
+text-indent: 12px;
+border-bottom: 1px solid black;
+padding: 4px 0;
+background: transparent url('<{$xoops_url}>/modules/multiMenu/script/images/arrow2.gif'); /*submenu background color*/
+background-repeat: no-repeat; 
+background-position: left 50%;
+}
+
+#dropmenudiv<{$block.mm}> a:hover{ /*hover background color*/
+background: #021946;
+}
+
+
+li.multimenu {
+list-style: none; 
+margin: -3px; 
+_margin: 0; 
+display: inline;
+}
+
+li.multimenu a {
+cursor:pointer;
+padding: 3px 0.5em; 
+margin-top: 0px; 
+border: 0px outset #778; 
+background: #01102d; /*main link background color*/
+}
+
+#navcontainer ul {text-align:center;}
+
+</style>
+
+<script language="JavaScript" type="text/javascript">
+//Contents for menu 
+		<{counter start=0 print=false}>
+		<{assign var=count value=1}>
+<{foreach item=imenu from=$block.contents}>
+  <{if $imenu.submenu == 0}>
+		<{counter assign=menu print=false}>
+		<{assign var=count value=1}>
+var menu<{$block.mm}><{$menu}>=new Array()
+  <{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+	<{assign var=sublink.$menu value=1}>	
+menu<{$block.mm}><{$menu}>[<{$count}>]='<a href="<{$imenu.linkurl}>" <{$imenu.target}>title="<{$imenu.alt_title}>"><{$imenu.image}><{$imenu.title}></a>'
+	<{assign var=count value=$count+1}>
+  <{/if}>
+<{/foreach}>
+
+var menuwidth<{$block.mm}>='<{$block.block_size}>' 		//default menu width
+var menubgcolor<{$block.mm}>='<{$block.submenu_color}>'	//menu bgcolor
+var disappeardelay<{$block.mm}>='<{$block.latency}>'  	//menu disappear speed onMouseout (in miliseconds)
+var hidemenu_onclick<{$block.mm}>='yes' 	//hide menu when user clicks within menu?
+</script>
+
+<script language="JavaScript" type="text/javascript" src="<{$xoops_url}>/modules/multiMenu/script/03/menu_<{$block.mm}>.js"></script>
+
+<{counter start=0 print=false}>
+<{counter assign=menu print=false}>
+<{assign var=ul value=0}>
+<{assign var=firstlink value=0}>
+
+<{foreach item=imenu from=$block.contents}>
+<{if $submenu == "0"}>
+
+<{if $ul == 0}><div id="navcontainer"><ul><{assign var=ul value=1}><{/if}>
+<!-- Main link -->
+	<{if $imenu.submenu == "1" OR $imenu.submenu == "2"}>
+	<!-- uncomment the line below to display bullet between links -->
+<!-- 	<{assign var=firstlink value=$firstlink+1}><{if $firstlink>1}><font color="#006699">&#149;</font><{/if}> -->
+	<!-- end bullet -->
+		<li class="multimenu">
+		<a title="<{$alt_title}>"
+		<{if $linkurl}><{$target}>href="<{$linkurl}>"<{else}>style="cursor:pointer;" onClick="return clickreturnvalue<{$block.mm}>()"<{/if}>
+
+ 		onMouseover="dropdownmenu<{$block.mm}>(this, event, menu<{$block.mm}><{$menu}>, menuwidth<{$block.mm}>)" 
+		onMouseout="delayhidemenu<{$block.mm}>()">
+		<img src="<{$xoops_url}>/modules/multiMenu/script/images/arrow1.gif" alt="<{$alt_title}>" />
+	<{else}>
+	<{assign var=firstlink value=$firstlink+1}>
+		<!-- uncomment the line below to display bullet between links -->
+<!-- 	<{if $firstlink>1}><font color="#006699">&#149;</font><{/if}> -->
+		<!-- end bullet -->
+		<li class="multimenu">
+		<a title="<{$alt_title}>"
+		<{if $linkurl}><{$target}>href="<{$linkurl}>"<{/if}>>
+	<{/if}>
+		<{$image}>
+		<{$title}>
+		</a>
+		</li>
+	<{counter assign=menu print=false}>
+
+<{elseif $submenu == "3"}>
+<{if $ul == 1}></ul></div><{assign var=ul value=0}><{/if}>
+<!-- Note -->
+	<div class="menuNote"><{$link}><{$image}><{$title}><{$a}></div>
+<{elseif $submenu == "4"}>
+<!-- Categorie -->
+	<{if $ul == 1}></ul></div><{assign var=ul value=0}><{/if}>
+	<div class="menuCat"><h3><{$link}><{$image}><{$title}></h3</div>
+<{/if}>
+
+<{assign var=submenu 	value=$imenu.submenu}>
+<{assign var=linkurl 	value=$imenu.linkurl}>
+<{assign var=link 	value=$imenu.link}>
+<{assign var=counter 	value=$menu}>
+<{assign var=target 	value=$imenu.target}>
+<{assign var=alt_title 	value=$imenu.alt_title}>
+<{assign var=image 	value=$imenu.image}>
+<{assign var=title 	value=$imenu.title}>
+<{assign var=a 		value=$imenu.a}>
+<{/foreach}>
+
+<{if $submenu == "0"}>
+<{if $ul == 0}><div id="navcontainer"><ul><{/if}>
+<!-- Main link -->
+		<li class="multimenu">
+		<a <{if $linkurl}><{$target}>href="<{$linkurl}>"<{/if}> title="<{$alt_title}>">
+		<{$image}>
+		<{$title}>
+		</a>
+		</li>
+<{elseif $submenu == "3"}>
+<{if $ul == 1}></ul></div><{/if}>
+<!-- Note -->
+	<div class="menuNote"><{$link}><{$image}><{$title}><{$a}></div>
+
+<{elseif $submenu == "4"}>
+<{if $ul == 1}></ul></div><{/if}>
+<!-- Categorie -->
+	<div class="menuCat"><h3><{$link}><{$image}><{$title}><{$a}></h3</div>
+<{/if}>
+<{if $ul == 1}></ul></div><{/if}>
+<!-- End multiMenu <{$block.mm}> -->

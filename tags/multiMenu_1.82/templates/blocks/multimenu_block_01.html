@@ -1,0 +1,45 @@
+<{if $block.format == "menu"}>
+	<{include file="db:multimenu_menu.html"}>
+
+<{elseif $block.format == "picslide"}>
+	<{include file="db:multimenu_picslide.html"}>
+
+<{elseif $block.format == "pic" or $block.format == "picscroll"}>
+	<{include file="db:multimenu_pic.html"}>
+
+<{elseif $block.format == "droplist" or $block.format == "selectlist"}>
+	<{include file="db:multimenu_droplist.html"}>
+
+<{elseif $block.format == "ul" or $block.format == "ol"}>
+	<{include file="db:multimenu_list.html"}>
+
+<{elseif $block.format == "dyn_01"}>
+	<{include file="db:multimenu_dyn_switchvert.html"}>
+
+<{elseif $block.format == "dyn_02"}>
+	<{include file="db:multimenu_dyn_vert.html"}>
+
+<{elseif $block.format == "dyn_03"}>
+	<{include file="db:multimenu_dyn_horiz.html"}>
+
+<{elseif $block.format == "dyn_04"}>
+	<{include file="db:multimenu_dyn_linkshoriz.html"}>
+
+<{elseif $block.format == "dyn_05"}>
+	<{include file="db:multimenu_dyn_context.html"}>
+
+<{elseif $block.format == "dyn_06"}>
+	<{include file="db:multimenu_dyn_context2.html"}>
+
+<{elseif $block.format == "dyn_07"}>
+	<{include file="db:multimenu_dyn_vert2.html"}>
+
+<{elseif $block.format == "dyn_08"}>
+	<{include file="db:multimenu_dyn_horiz_css.html"}>
+
+<{elseif $block.format == "dyn_09"}>
+	<{include file="db:multimenu_dyn_vert_css.html"}>
+
+<{elseif $block.format == "dyn_10"}>
+	<{include file="db:multimenu_dyn_tree.html"}>
+<{/if}>

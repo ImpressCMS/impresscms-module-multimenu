@@ -1,0 +1,263 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033\deftab708{\fonttbl{\f0\fmodern\fprq1\fcharset0 Courier New;}}
+{\*\generator Msftedit 5.41.15.1503;}\viewkind4\uc1\pard\qc\lang1036\b\f0\fs28 Guide de cr\'e9ation de template pour multiMenu 1.8\fs20\par
+\pard\b0\par
+Ce petit guide \'e0 pour but de vous aider \'e0 vous constituer votre propre menu personnalis\'e9. Nous nous attacherons \'e0 d\'e9finir les proc\'e9dure \'e0 respecter afin de cr\'e9er des templates de menu. Les languages que nous aborderons seront le hmtl, Smarty et autres scriptes de languages dynamiques (javascript). Il n'est donc pas n\'e9cessaire de modificer le code php.\par
+\par
+\b A. \ul Les bases\par
+\ulnone\b0\par
+Afin de se constituer son propre template multiMenu, voici les informations minimums qu\rquote il faut conna\'eetre.\par
+\par
+\b 1) \ul Les variables smarty\ulnone\par
+\b0\par
+2 types de variables sont disponibles pour cr\'e9er vos menus. \par
+\par
+\b a. Les variables de pr\'e9f\'e9rences du bloc : <\{block.variable\}>\par
+\b0 Elles d\'e9finisent les pr\'e9f\'e9rences du bloc activ\'e9 :\par
+\par
+<\{block.format\}> : Format de menu employ\'e9 (ul, ol, menu, menu_01 \'e0 05, etc.)\par
+<\{block.marquee\}> : Balise marquee.\par
+<\{block.columns\}> : Nombre de liens \'e0 afficher avant d'activer le passage \'e0 une nouvelle colonne.\par
+<\{block.block_size\}> : Largeur du bloc, surtout utile pour les script n\'e9cessitant cette information\par
+<\{block.marquee_height\}> : Hauteur du bloc, idem\par
+<\{block.marquee_delay\}> : Temps de d\'e9lai \'e0 afficher pour les balises marquee.\par
+<\{block.mm\}> : Num\'e9ro du menu en cours (valeur comprise entre 01 et 08). Cette valeur est utilis\'e9e pour diff\'e9rencier les variables utilis\'e9es dans les scripts et \'e9viter les confusions de valeurs lorsque plusieurs menu utilisant le m\'eame script s'affichent dans une page.\par
+\par
+\par
+\b b. Variables de contenu : <\{imenu.variable\}>\par
+\b0 Ce sont les variables g\'e9n\'e9r\'e9e par le modules et qui permettent de cr\'e9er les liens.\par
+<\{imenu.submenu\}> : type de lien. \par
+0 = lien principal\par
+1 = lien secondaire permanents\par
+2 = lien secondaire dynamique\par
+3 = note\par
+4 = cat\'e9gorie\par
+\par
+<\{imenu.title\}>\tab\tab\b // titre du lien (code actif)\b0\par
+\par
+<\{imenu.alt_title\}> \tab\b // titre du lien (code d\'e9sactiv\'e9)\b0\par
+\par
+\lang2057 <\{target\}> \tab\tab\tab\b //  balise target (_self, _blank, _parent, _child)\b0\par
+\par
+\lang1036 <\{imenu.link\}>\tab\tab\b // Lien constitu\'e9 (url - cible - nom de l'image). Ex : <a href="http://www.monsite.com/index.php" target="_self" title="Mon site">\par
+\b0\par
+<\{imenu.linkurl\}> \tab\b // Uniquement l'url : ex : http://www.monsite.com/index.php.\par
+\b0\par
+<\{imenu.a\}> \tab\tab\b // En fonction si l'url existe ou non, prend la valeur : </a>\par
+\b0\par
+<\{imenu.image\}>\tab\tab\b // Image constitu\'e9e (url - largeur - nom de l'image). Ex : <img href="http://www.monsite.com/illu.gif" width="160" alt="Mon site" />\par
+\b0\par
+\par
+\par
+\b 2) \ul Cr\'e9er une url\ulnone\par
+\b0\par
+\b A. M\'e9thode simple\par
+\b0 La m\'e9thode la plus simple est la suivante, qu'il y ait une url ou non dans le lien :\par
+\par
+<\{$imenu.link\}>\tab\tab\b // Le lien complet (contenant la cible et le titre\par
+\b0 <\{$imenu.image\}>\tab\tab\b // L'image \'e9ventuelle\par
+\b0 <\{$imenu.title\}>\tab\tab\b // Le texte \'e9ventuel\par
+\b0 <\{$imenu.a\}>\tab\tab\b // Le tag de fermeture \'e9ventuel\par
+\b0\par
+\b B. M\'e9thode compl\'e8te\par
+\b0 La deuxi\'e8me m\'e9thode disponible, si l'on veut conserver l'aspect de lien, ou si on utilise par exemple des classes de feuille de style, est la suivante :\par
+\par
+<a class="mainMenu"\tab\tab\b // D\'e9finition de la classe du lien\par
+\b0 <\{if $imenu.link\}>href="<\{$imenu.linkurl\}>" <\{$imenu.target\}><\{/if\}>\par
+\pard\fi708\li2124\b\tab // L'url contenant ou non le lien\par
+\pard\lang2057\b0 title="<\{$imenu.alt_title\}>"> \b // La balise title\par
+\lang1036\b0 <\{$imenu.image\}>\tab\tab\tab\b // L'image \'e9ventuelle\par
+\b0 <\{$imenu.title\}>\tab\tab\tab\b // Le texte \'e9ventuel\par
+\b0 <\{$imenu.a\}>\tab\tab\tab\b // Le tag de fermeture \'e9ventuel\b0\par
+\par
+\b C. M\'e9thode diff\'e9renti\'e9e\par
+\b0 Enfin, la troisi\'e8me m\'e9thode permet d'affecter un aspect diff\'e9rent si le lien existe ou non.\par
+\par
+<\{if $imenu.link\}> \tab\tab\b // Y a-til un lien ?\par
+\pard\fi708\li2124\b0\tab\b // Oui, je cr\'e9e un lien normal\par
+\pard\b0\tab <\{$imenu.link\}><\{$imenu.image\}><\{$imenu.title\}><\{$imenu.a\}>\par
+\tab\par
+<\{else\}>\tab\tab\tab\tab\b // Non, alors je lui donne un autre aspect\par
+\pard\fi708\b0 <font color="red"><\{$imenu.title\}></font>\tab\tab\par
+\pard <\{/if\}>\par
+\par
+Dans le deuxi\'e8me cas de figure on peut lui ajouter une image qui soulignera le fait qu'il s'agit d'un lien d'information ou de transition dans le cas d'un menu dynamique.\par
+\par
+\par
+\ul\b 3) Cr\'e9er la liste des liens disponibles\par
+\ulnone\b0\par
+Voici les codes \'e0 utiliser pour distinguer les diff\'e9rents types de liens disponibles \'e0 int\'e9grer\~:\par
+\par
+<\{foreach item=imenu from=$block.contents\}>\tab\b // Cr\'e9er la boucle pour r\'e9cup\'e9rer les liens\par
+\b0\par
+<\{if $imenu.submenu == 0\}>\tab\tab\tab\tab\b // Lien principal\par
+\b0\tab <\{$imenu.link\}><\{$imenu.image\}><\{$imenu.title\}><\{$imenu.a\}>\par
+\par
+\pard\fi708\li3540\tab\tab\b // Lien secondaire dynamique ou permanent\par
+\pard\b0 <\{elseif $imenu.submenu == 1 OR $imenu.submenu == 2\}>\par
+\tab <\{$imenu.link\}><\{$imenu.image\}><\{$imenu.title\}><\{$imenu.a\}>\par
+\par
+<\{elseif $imenu.submenu == 3\}>\tab\tab\tab\b // Note d'information\par
+\b0\tab <\{$imenu.link\}><\{$imenu.image\}><\{$imenu.title\}><\{$imenu.a\}>\par
+\par
+<\{elseif $imenu.submenu == 4\}>\tab\tab\tab\b // Cat\'e9gories\par
+\b0\tab <h3><\{$imenu.link\}><\{$imenu.image\}><\{$imenu.title\}><\{$imenu.a\}></h3>\par
+<\{/if\}>\par
+\par
+<\{/foreach\}>\tab\tab\tab\tab\tab\tab\b // Fin de la boucle\par
+\b0\par
+\par
+4) Cr\'e9er un tableau \'e0 plusieurs colonnes\par
+\par
+\tab <\{counter start=0 print=false\}>\tab\tab\b // Cr\'e9er le compteur\b0\par
+\par
+<table>\tab\tab\tab\tab\tab\tab\tab\b // Ouvrir le tableau\b0\par
+<tr>\par
+<td>\par
+\par
+      \tab <\{foreach item=imenu from=$block.contents\}>\tab\b // Cr\'e9er la boucle pour r\'e9cuperer les liens\par
+\b0\par
+\tab <\{if $count >= $block.columns_limit\}>\tab\tab\b // V\'e9rifier si le compteur atteint la limite du nombre d'\'e9lements\b0\par
+</td><td>\tab\tab\tab\tab\tab\tab\tab\tab\b // Si oui, cr\'e9er une nouvelle colonne\par
+\b0\tab <\{counter start=0 print=false\}>\tab\tab\tab // Remettre le compteur \'e0 zero\par
+\tab <\{/if\}>\tab\tab\tab\tab\tab\tab\tab\b // Fin de v\'e9rification\par
+\b0\par
+         <\{$imenu.link\}><\{$imenu.title\}><\{$imenu.a\}>\tab\b // G\'e9n\'e9rer le contenu du tableau\par
+\b0\tab <\{counter assign=count print=false\}>\tab\tab\b // Pour chaque lien, incr\'e9menter le compteur de 1\par
+\b0\par
+     \tab <\{/foreach\}>\tab\tab\tab\tab\tab\tab\b // Fin de la boucle \par
+\b0\par
+</td>\tab\tab\tab\tab\tab\tab\tab\tab\b // Fermer le tableau\par
+\b0 <tr>\par
+</table>\par
+\tab\tab\tab\tab\tab\tab\tab\tab\par
+\page\b B. \ul Les menus complexes\par
+\ulnone\b0\par
+La mise en forme de menu demande des mises en place complexe dans le code. Par exemple, si vous souhaitez diff\'e9rencier le contenu en fonction qu\rquote il s\rquote agit d\rquote un lien principal, secondaire, d\rquote une cat\'e9gorie ou d\rquote une note, voici quelques trucs et astuces.\par
+\par
+\par
+\ul\b 1) Cr\'e9er une liste \'e0 puce\par
+\ulnone\b0\par
+\lang2060 Toute la difficult\'e9 r\'e9side dans le fait de savoir quand ouvrir ou fermer les tags de liste. Pour cela, nous cr\'e9ons une variable smarty "url" \'e0 laquelle on affectera une valeur 1 pour ouverte et 0 pour fermer. En v\'e9rifiant l'\'e9tat de cette valeur \'e0 chaque tour de boucle, on sait si on doit l'ouvrir ou la fermer, et ce pour les liens principaux ou les liens secondaires.\par
+\par
+<\{counter start=0 print=false\}>\par
+<\{assign var=ul_main value=0\}>\tab\tab\tab\tab\b // Initialiser la variable de liste \'e0 puce principale : ul_main\b0\par
+<\{assign var=ul_sec  value=0\}>\tab\tab\tab\tab\b // Initialiser la variable de liste \'e0 puce secondaire : ul_sec\par
+\b0 <\{foreach item=imenu from=$block.contents\}>\par
+\par
+<\{if $imenu.submenu == 0\}>\tab\tab\tab\tab\tab\tab\tab\b // Lien principal\par
+\b0 <\{if $ul_sec == 1\}></ul><\{assign var=ul_sec value=0\}><\{/if\}>\tab\b // Si la liste secondaire est ouverte, la fermer\par
+\b0 <\{if $ul_main == 0\}><ul><\{assign var=ul_main value=1\}><\{/if\}>\tab\b // Si la liste principale est ferm\'e9e, l'ouvrir\par
+\b0\tab <li><\{$imenu.link\}><\{$imenu.image\}><\{$imenu.title\}><\{$imenu.a\}></li>\par
+\par
+<\{elseif $imenu.submenu == 1 OR $imenu.submenu == 2\}>\tab\tab\b // Lien secondaire\b0\par
+<\{if $ul_sec == 0\}><ul><\{assign var=ul_sec value=1\}><\{/if\}>\tab\b // Si la liste secondaire est ferm\'e9e, l'ouvrir\par
+\b0\tab\tab\par
+\tab <li><\{$imenu.link\}><\{$imenu.image\}><\{$imenu.title\}><\{$imenu.a\}></li>\par
+\par
+<\{elseif $imenu.submenu == 3\}>\tab\tab\tab\tab\tab\tab\b // Note\par
+\b0 <\{if $ul_main == 1\}></ul><\{assign var=ul_main value=0\}><\{/if\}>\tab\b // Si la liste principale est ouverte, la fermer\par
+\b0 <\{if $ul_sec == 1\}></ul><\{assign var=ul_sec  value=0\}><\{/if\}>\tab\b // Si la liste secondaire est ouverte, la fermer\par
+\b0\tab <\{$imenu.link\}><\{$imenu.image\}><\{$imenu.title\}><\{$imenu.a\}></p>\par
+\par
+<\{elseif $imenu.submenu == 4\}>\tab\tab\tab\tab\tab\tab\b // Cat\'e9gorie\b0\par
+<\{if $ul_main == 1\}></ul><\{assign var=ul_main value=0\}><\{/if\}>\tab\b // Si la liste principale est ouverte, la fermer\par
+\b0 <\{if $ul_sec == 1\}></ul><\{assign var=ul_sec  value=0\}><\{/if\}>\tab\b // Si la liste secondaire est ouverte, la fermer\par
+\b0\tab <\{$imenu.link\}><\{$imenu.image\}><h3><\{$imenu.title\}></h3><\{$imenu.a\}>\par
+<\{/if\}>\par
+<\{/foreach\}>\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\b // Apr\'e8s avoir fait le tour des liens existant, v\'e9rifier ce qu'il reste \'e0 fermer\par
+\b0\tab <\{if $ul_main == 1\}></ul><\{/if\}>\tab\tab\tab\tab\tab\b // Si la liste principale est ouverte, la fermer\b0\par
+\tab <\{if $ul_sec == 1\}></ul><\{/if\}>\tab\tab\tab\tab\tab\b // Si la liste secondaire est ouverte, la fermer\par
+\b0\tab\par
+\lang1036\par
+\par
+\ul\b 2) Cr\'e9er un menu dynamique en v\'e9rifiant si un lien principal dispose de sous-liens\par
+\ulnone\b0\par
+La difficult\'e9 des listes dynamiques est de pr\'e9voir si un lien principal dispose de sous-liens, puisque multiMenu affiche les liens les uns apr\'e8s les autres. La seule fa\'e7on de proc\'e9der est de "retarder" l'affichage des liens en cr\'e9ant une sorte de tampon. Les valeurs en cours s'\'e9civent : \lang2060 $imenu.submenu, les valeurs en cache s'\'e9crivent $submenu. Dans le script ci-dessous, nous avons inclu la gestion des liens sous forme de liste \'e0 puce.\lang1036\par
+\par
+\lang2060 <\{counter start=0 print=false\}>\par
+<\{counter assign=count print=false\}>\par
+<\{assign var=ul value=0\}>\par
+\par
+<\{foreach item=imenu from=$block.contents\}>\tab\tab\b // \lang1036 Cr\'e9er la boucle pour r\'e9cuperer les liens\lang2060\b0\par
+<\{if $submenu == "0"\}>\tab\tab\tab\tab\tab\tab\b // Le lien en cache est un lien principal. En m\'eame temps, on v\'e9rifie s'il existe d\'e9j\'e0 une valeur en cache, dans le cas contraire, on passe un tour et on affiche rien (valeur \'e9gale "0" et non 0). \par
+\b0 <\{if $ul == 0\}><ul><\{assign var=ul value=1\}><\{/if\}> \par
+<!-- Main link -->\par
+\tab <\{if $imenu.submenu == "1" OR $imenu.submenu == "2"\}>\tab\b // Si le lien en cours est un lien secondaire, on sait que le lien en cache doit disposer du script d'activation des liens secondaire\par
+\b0\tab\tab <li class="multimenu">\par
+\tab\tab <a title="<\{$alt_title\}>"\tab\tab\tab\b // Cr\'e9er le lien en cache avec le script, puisqu'il dispose d'au moins un lien secondaire\par
+\b0\tab\tab <\{if $linkurl\}><\{$target\}>href="<\{$linkurl\}>"<\{else\}>onClick="return clickreturnvalue03()"<\{/if\}>\par
+ \tab\tab onMouseover="dropdownmenu03(this, event, menu<\{$block.mm\}><\{$count\}>, menuwidth)" \par
+\tab\tab onMouseout="delayhidemenu03()">\par
+\tab\tab <img src="<\{$xoops_url\}>/modules/multiMenu/script/images/arrow1.gif" alt="<\{$alt_title\}>" /> // Le lien en cours est un lien secondaire, donc on affiche une fl\'e8che sur le lien en cache\par
+\tab <\{else\}>\tab\tab\tab\tab\tab\tab\tab\b // Le lien en cours n'est pas un lien secondaire, donc on ne met pas une fl\'e8che et on d\'e9sactive le script pour le lien en cache\par
+\b0\tab\tab <li class="multimenu">\par
+\tab\tab <a title="<\{$alt_title\}>"\par
+\tab\tab <\{if $linkurl\}><\{$target\}>href="<\{$linkurl\}>"<\{/if\}>>\par
+\tab <\{/if\}>\par
+\tab\tab <\{$image\}>\par
+\tab\tab <\{$title\}>\par
+\tab\tab </a>\par
+\tab\tab </li>\par
+\par
+\tab <\{counter assign=count print=false\}>\par
+<\{elseif $submenu == "3"\}>\tab\tab\tab\tab\tab\b // Le menu en cache est une note\b0\par
+<\{if $ul == 1\}></ul></div><\{assign var=ul value=0\}><\{/if\}>\tab\par
+<!-- Note -->\par
+\tab <div class="menuNote"><\{$link\}><\{$image\}><\{$title\}><\{$a\}></div>\par
+\tab <\{counter assign=count print=false\}>\par
+\par
+<\{elseif $submenu == "4"\}>\tab\tab\tab\tab\tab\b // Le menu en cache est une cat\'e9gorie\b0\par
+<!-- Categorie -->\par
+\tab <\{if $ul == 1\}></ul></div><\{assign var=ul value=0\}><\{/if\}>\par
+\tab <div class="menuCat"><h3><\{$link\}><\{$image\}><\{$title\}></h3</div>\par
+<\{/if\}>\par
+\par
+<\{assign var=submenu \tab value=$imenu.submenu\}>\tab\b // R\'e9cup\'e9ration des valeurs du lien en cours pour les mettre en cache\par
+\b0 <\{assign var=linkurl \tab value=$imenu.linkurl\}>\tab\b // Ces valeurs seront utilis\'e9es pour afficher le lien lors du tours suivant\b0\par
+<\{assign var=link \tab value=$imenu.link\}>\par
+<\{assign var=counter \tab value=$count\}>\par
+<\{assign var=target \tab value=$imenu.target\}>\par
+<\{assign var=alt_title \tab value=$imenu.alt_title\}>\par
+<\{assign var=image \tab value=$imenu.image\}>\par
+<\{assign var=title \tab value=$imenu.title\}>\par
+<\{assign var=a \tab\tab value=$imenu.a\}>\par
+\par
+<\{/foreach\}>\tab\tab\tab\tab\tab\tab\lang1036\b // Fin de la boucle \b0\par
+\par
+\lang2060 <\{if $submenu == "0"\}>\tab\tab\tab\tab\tab\lang1036\b // Du fait de la mise en cache des liens, et que les liens en cours ont pass\'e9 le premier tour, nous affichons la derni\'e8re valeure qui reste en cache\lang2060\par
+\pard\b0 <\{if $ul == 0\}><ul><\{/if\}>\par
+<!-- Main link -->\tab\par
+\tab <\{if $imenu.submenu == "1" OR $imenu.submenu == "2"\}>\par
+\tab\tab <li class="multimenu">\par
+\tab\tab <a title="<\{$alt_title\}>"\par
+\tab\tab <\{if $linkurl\}><\{$target\}> href="<\{$linkurl\}>"<\{else\}>onClick="return clickreturnvalue03()"<\{/if\}>\par
+ \tab\tab onMouseover="dropdownmenu03(this, event, menu<\{$block.mm\}><\{$count\}>, menuwidth)" \par
+\tab\tab onMouseout="delayhidemenu03()">\par
+\tab\tab <img src="<\{$xoops_url\}>/modules/multiMenu/script/images/arrow1.gif" alt="<\{$alt_title\}>" align="left" />\par
+\tab <\{else\}>\par
+\tab\tab <li class="multimenu">\par
+\tab\tab <a<\{if $linkurl\}><\{$target\}> href="<\{$linkurl\}>"<\{/if\}> title="<\{$alt_title\}>">\par
+\tab <\{/if\}>\par
+\tab\tab <\{$image\}>\par
+\tab\tab <\{$title\}>\par
+\tab\tab </a>\par
+\tab\tab </li>\par
+\par
+<\{elseif $submenu == "3"\}>\par
+<\{if $ul == 1\}></ul><\{/if\}>\par
+<!-- Note -->\par
+\tab <div class="menuNote"><\{$link\}><\{$image\}><\{$title\}><\{$a\}></div>\par
+\par
+<\{elseif $submenu == "4"\}>\par
+<\{if $ul == 1\}></ul><\{/if\}>\par
+<!-- Categorie -->\par
+\tab <div class="menuCat"><h3><\{$link\}><\{$image\}><\{$title\}><\{$a\}></h3</div>\par
+<\{/if\}>\par
+<\{if $ul == 1\}></ul><\{/if\}>\par
+\lang1036\par
+\par
+\par
+\par
+}
+ 

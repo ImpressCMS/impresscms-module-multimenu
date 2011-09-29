@@ -1,0 +1,52 @@
+<!-- Start multiMenu <{$block.mm}> -->
+<{if $block.marquee}><marquee <{$block.marquee}> scrollamount="<{$block.marquee_delay}>" scrolldelay="60" height="<{$block.marquee_height}>" onmouseover="this.stop()" onmouseout="this.start()"><{/if}>
+	<table cellspacing="0" cellpadding="0">
+	<tr>
+	<td width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+	<div align="center">
+<{assign var=td value=-1}>
+      <{foreach item=imenu from=$block.contents}>
+	<{if $imenu.submenu == 0}>
+	<{assign var=td value=$td+1}>
+	<{if $td >= $block.columns_limit}>
+		</div>
+		</td>
+		<!-- New column -->
+		<td width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<div align="center">
+		<{assign var=td value=0}>
+	<{/if}>
+          	<p><{$imenu.link}><{$imenu.image}><br />
+		<{$imenu.title}><{$imenu.a}></p>
+
+	<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+          	<p><{$imenu.link}><{$imenu.image}><br />
+		<i><{$imenu.title}></i><{$imenu.a}></p>
+	<{elseif $imenu.submenu == 3}>
+		</div>
+		<p><{$imenu.link}><{$imenu.image}><br />
+		<i><{$imenu.title}></i><{$imenu.a}></p>
+		<div align="center">
+
+	<{elseif $imenu.submenu == 4}>
+
+	<{assign var=td value=$td+1}>
+	<{if $td >= $block.columns_limit}>
+		</div>
+		</td>
+		<!-- New column -->
+		<td width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<div align="center">
+		<{assign var=td value=0}>
+	<{/if}>
+      	<h3><{$imenu.link}><{$imenu.image}>
+		<{$imenu.title}><{$imenu.a}></h3>
+	<{/if}>
+     <{/foreach}>
+
+</div>
+</td>
+</tr>
+</table>
+<{if $block.marquee}></marquee><{/if}>
+<!-- End multiMenu <{$block.mm}> -->

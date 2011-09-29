@@ -1,0 +1,122 @@
+Comment étendre le nombre de menus disponibles ?
+Exemple, rajout d'un menu
+
+1) Allez dans le panneau d'administration de Xoops, désactivez puis désinstallez le module.
+Cette étape est obligatoire car vous allez rajouter une table à la base.
+
+2) Ouvrez le fichier /xoops/modules/multiMenu/sql/mysql.sql et recopiez la définition d'une table
+en lui donnant un nouveau nom. Par exemple, recopiez la définition de la table
+multimenu04 et nommez la multimenu05. Cela doit vous donner çà :
+
+CREATE TABLE multimenu05 (
+  id int(5) unsigned NOT NULL auto_increment,
+  title varchar(150) NOT NULL default '',
+  hide tinyint(1) unsigned NOT NULL default '0',
+  link varchar(255) default NULL,
+  imageurl varchar(255) NOT NULL default '',
+  weight tinyint(4) unsigned NOT NULL default '0',
+  target varchar(10) default NULL,
+  groups varchar(255) default NULL,
+  PRIMARY KEY (id)
+) TYPE=MyISAM;
+
+
+3) Ouvrez le fichier /xoops/modules/multiMenu/xoops_version.php
+Localisez les lignes suivantes :
+$modversion['tables'][0] = "multimenu01";
+$modversion['tables'][1] = "multimenu02";
+$modversion['tables'][2] = "multimenu03";
+$modversion['tables'][3] = "multimenu04";
+
+Tout de suite après la dernière ligne, rajoutez :
+$modversion['tables'][4] = "multimenu05";
+
+Ensuite, et toujours dans ce même fichier, localisez les lignes suivantes :
+$modversion['blocks'][4]['file'] = "multimenu.php";
+$modversion['blocks'][4]['name'] = _IM_MULTIMENU_NAME_04;
+$modversion['blocks'][4]['description'] = "link menu";
+$modversion['blocks'][4]['show_func'] = "multimenu_show";
+$modversion['blocks'][4]['edit_func'] = "multimenu_edit";
+$modversion['blocks'][4]['options'] = "ol|0|1|weight ASC|255|2|90|160|04";
+$modversion['blocks'][4]['template'] = 'multimenu_block_04.html';
+
+recopiez les juste après ce même bloc en les modifiant comme suit :
+$modversion['blocks'][5]['file'] = "multimenu.php";
+$modversion['blocks'][5]['name'] = _IM_MULTIMENU_NAME_05;
+$modversion['blocks'][5]['description'] = "link menu";
+$modversion['blocks'][5]['show_func'] = "multimenu_show";
+$modversion['blocks'][5]['edit_func'] = "multimenu_edit";
+$modversion['blocks'][5]['options'] = "ol|0|1|weight ASC|255|2|90|160|05";
+$modversion['blocks'][5]['template'] = 'multimenu_block_05.html';
+
+Note : Faites attention à bien modifier 40|04 en 40|05 sur la ligne $modversion['blocks'][5]['options']
+c'est important.
+
+Décalez ensuite les block suivants :
+
+$modversion['blocks'][5]['file'] = "multimenu_add.php";
+$modversion['blocks'][5]['name'] = _IM_MULTIMENU_NAME_05;
+$modversion['blocks'][5]['description'] = "link menu";
+$modversion['blocks'][5]['show_func'] = "multimenu_add_show";
+$modversion['blocks'][5]['edit_func'] = "multimenu_add_edit";
+$modversion['blocks'][5]['options'] = "menu|0|1|weight ASC|255|2|90|160|01";
+$modversion['blocks'][5]['template'] = 'multimenu_block_A.html';
+
+$modversion['blocks'][6]['file'] = "multimenu_add.php";
+$modversion['blocks'][6]['name'] = _IM_MULTIMENU_NAME_06;
+$modversion['blocks'][6]['description'] = "link menu";
+$modversion['blocks'][6]['show_func'] = "multimenu_add_show";
+$modversion['blocks'][6]['edit_func'] = "multimenu_add_edit";
+$modversion['blocks'][6]['options'] = "menu|0|1|weight ASC|255|2|90|160|01";
+$modversion['blocks'][6]['template'] = 'multimenu_block_B.html';
+
+
+4) Ouvrez le fichier /xoops/modules/multiMenu/language/french/modinfo.php
+Localisez la ligne suivante :
+define("_IM_MULTIMENU_NAME_04",	"multiMenu 4");
+
+Juste après, ajoutez :
+define("_IM_MULTIMENU_NAME_05",	"multiMenu 5");
+
+Toujours dans ce même fichier, cherchez la ligne :
+define("_IM_MULTIMENU_DESC",	"Permet de créer jusqu'à 4 Menus Personnalisés différents.");
+
+et remplacez la par :
+define("_IM_MULTIMENU_DESC",	"Permet de créer jusqu'à 5 Menus Personnalisés différents.");
+
+Effectuez les même manipulations pour le fichier /xoops/modules/multiMenu/language/english/modinfo.php
+
+
+5) Ouvrez le fichier /xoops/modules/multiMenu/admin/menu.php
+Localisez les 2 lignes suivantes :
+$adminmenu[3]['title'] = _IM_MULTIMENU_NAME_04;
+$adminmenu[3]['link'] = "admin/index.php?Menu=04";
+
+recopiez les juste en dessous comme suit :
+$adminmenu[4]['title'] = _IM_MULTIMENU_NAME_05;
+$adminmenu[4]['link'] = "admin/index.php?Menu=05";
+
+6) Ouvrez le fichier /xoops/modules/multiMenu/admin/index.php
+Localisez la ligne suivante :
+$tblcolor[1]=$tblcolor[2]=$tblcolor[3]=$tblcolor[4]="#DDE";
+Remplacez la par :
+$tblcolor[1]=$tblcolor[2]=$tblcolor[3]=$tblcolor[4]=$tblcolor[5]="#DDE";
+Localisez la ligne :
+echo "<li style=\"list-style: none; margin: 0; display: inline; \"><a href=\"index.php?Menu=04\" style=\"padding: 3px 0.5em; margin-left: 3px; border: 1px solid #778; background: ".$tblcolor[4]."; text-decoration: none; \">". _IM_MULTIMENU_NAME_04 ."</a></li>";
+
+Recopiez la juste en dessous comme suit :
+echo "<li style=\"list-style: none; margin: 0; display: inline; \"><a href=\"index.php?Menu=05\" style=\"padding: 3px 0.5em; margin-left: 3px; border: 1px solid #778; background: ".$tblcolor[5]."; text-decoration: none; \">". _IM_MULTIMENU_NAME_05 ."</a></li>";
+
+En fait il faut remplacer les 04 par 05 et 4 par 5.
+Assurez vous de tous les avoir remplacer comme il faut.
+
+
+7) Fichier Template
+
+Copiez l'un des fichier templates et le renommer.
+ex : multimenu_block_04.html -> multimenu_block_05.html
+
+8) Terminez en installant le module dans le panneau de configuration des modules
+
+Si vous avez bien suivi toutes les étapes, vous disposez maintenant d'un nouveau menu
+

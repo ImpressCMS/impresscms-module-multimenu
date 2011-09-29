@@ -1,0 +1,55 @@
+<!-- Start multiMenu <{$block.mm}> -->
+<link rel="stylesheet" type="text/css" href="<{$xoops_url}>/modules/multiMenu/script/05/context_menu.css">
+
+<div id="context_menu" class="skin" style="width:<{$block.block_size}>px;" >
+<{assign var=td value=-1}>
+	<table>
+	<tr>
+	<td id="mainmenu" width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0}>
+	<{assign var=td value=$td+1}>
+	<{if $td > $block.columns_limit}>
+		</td>
+		<td id="mainmenu" width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<{assign var=td value=0}>
+	<{/if}>
+<{if $td == 0 or $top == 1}>
+	<{if $imenu.link}><a class="menuTop" href="<{$imenu.linkurl}>" <{$imenu.target}><{/if}>title="<{$imenu.alt_title}>"><{$imenu.image}><{$imenu.title}></a>
+<{assign var="top" value="0"}><{counter print=false assign=count}>
+<{else}> 
+	<a class="menuMain" <{if $imenu.link}>href="<{$imenu.linkurl}>" <{$imenu.target}><{/if}>title="<{$imenu.alt_title}>">
+<{$imenu.image}><{$imenu.title}></a>
+<{/if}>
+<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+<{if $top == 1}>
+	<a class="menuSubTop" <{if $imenu.link}>href="<{$imenu.linkurl}>" <{$imenu.target}><{/if}>title="<{$imenu.alt_title}>"><{$imenu.image}><{$imenu.title}></a>
+<{assign var="top" value="0"}>
+<{else}>
+	<a class="menuSub" <{if $imenu.link}>href="<{$imenu.linkurl}>" <{$imenu.target}><{/if}>title="<{$imenu.alt_title}>"><{$imenu.image}><{$imenu.title}></a>
+<{/if}>
+<{elseif $imenu.submenu == 3}>
+	<{if $imenu.link}><a class="menuNote" href="<{$imenu.linkurl}>" <{$imenu.target}>title="<{$imenu.alt_title}>"><{/if}><{$imenu.image}><{$imenu.title}></a>
+<{assign var="top" value="1"}>
+<{elseif $imenu.submenu == 4}>
+
+	<{assign var=td value=$td+1}>
+	<{if $td > $block.columns_limit}>
+		</td>
+		<td id="mainmenu" width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<{assign var=td value=0}>
+	<{/if}>
+
+	<h3><{$imenu.link}><{$imenu.image}><{$imenu.title}><{$imenu.a}></h3>
+<{counter print=false assign=count}>
+<{assign var="top" value="1"}>
+<{/if}>
+
+<{/foreach}>
+</td>
+</tr>
+</table>
+<!-- End multiMenu <{$block.mm}> -->
+</div>
+
+<script language="JavaScript" type="text/javascript" src="<{$xoops_url}>/modules/multiMenu/script/05/context_menu.js"></script>

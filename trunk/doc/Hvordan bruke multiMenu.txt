@@ -1,0 +1,45 @@
+multiMenu : hvordan bruke den?
+
+Author : Solo
+Oversetter: Earplane
+
+1) Hva er multiMenu?
+
+multiMenu er en lenkeblokk-behandler med flere bruksområder. Denne modulen lar deg opprette opp til 4 egendefinerte blokker med egendefienrte lenker og bilder.
+
+
+2) 4 egendefinerte menyer + 2
+
+Du kan definere opp til 4 forskjellige menyer, hver med sine egne lenker. I tillegg til disse 4 blokkene, har du nå 2 "frie" blokker som du kan bruke til å velge en hvilken som helst kategori med lenker.
+
+
+3) Menyformer.
+
+Denne versjonen lar deg velge mellom en lang rekke forskjellige menyformer :
+
+- Standard hovedmeny
+- Hengemeny
+- Valgboks
+- Fast bilde
+- Glidende bilde
+- Usortert liste
+- Nummerert liste
+- Glidende liste
+- Rullende liste
+
+Du kan velge hvilken listetype du vil bruke ved å endre den blokken det gjelder (i blokk-innstillingene).
+
+
+4) Bilder
+
+For hver lenke kan du velge en illustrasjon. Du må vite adressen til bildet. I senere versjoner vil en bildeopplaster være innlagt. Husk at noen menytyper vil overse bilder (alle listene) mens andre vil være avhengig av dem (bildetypene).
+
+
+5) Gruppetilgang
+
+For hver eneste lenke kan du velge hvilke grupper som skal ha tilgang eller ikke.
+
+
+6) Cache-egenskaper.
+
+Det er en modul som kun har blokker (og ingen hovedside), og dermed har du utvidede cache-muligheter. Cache-egenskapene bestemmes i innstillingene for hver blokk.

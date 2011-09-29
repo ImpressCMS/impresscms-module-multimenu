@@ -1,0 +1,147 @@
+multiMenu : hvordan legge til nye blokker?
+
+Forfatter : Hervé
+Oversetter: Earplane
+
+Du har installert multiMenu og er fornøyd med modulen. Men 4 menyer er ikke nok. No problem. Legg til flere menyer på følgende måte...
+
+
+1) Forberedelser
+
+Gå til adminpanelet i Xoops, deaktivèr og avinstallèr modulen. Vær oppmerksom på at du vil miste alle data, om du ikke har tatt en sikkerhetskopi. Dette er nødvendig, siden du vil trenge å opprette en ny tabell i databasen.
+
+
+2) MySQL og Databasen
+
+Åpne filen /xoops/modules/multiMenu/sql/mysql.sql, kopièr en tabelldefinisjon og lim den inn med et nytt navn. F.eks. kopièr 'multimenu04' og lim den inn som 'multiMenu05'.  Det vil se slik ut:
+
+CREATE TABLE multimenu05 (
+  id int(5) unsigned NOT NULL auto_increment,
+  title varchar(150) NOT NULL default '',
+  hide tinyint(1) unsigned NOT NULL default '0',
+  link varchar(255) default NULL,
+  imageurl varchar(255) NOT NULL default '',
+  weight tinyint(4) unsigned NOT NULL default '0',
+  target varchar(10) default NULL,
+  groups varchar(255) default NULL,
+  PRIMARY KEY (id)
+) TYPE=MyISAM;
+
+ 
+
+3) xoops_version.php
+
+Åpne /xoops/modules/multiMenu/xoops_version.php
+
+Finn disse linjene:
+$modversion['tables'][0] = "multimenu01";
+$modversion['tables'][1] = "multimenu02";
+$modversion['tables'][2] = "multimenu03";
+$modversion['tables'][3] = "multimenu04";
+
+Sett inn følgende linje etter de forrige:
+$modversion['tables'][4] = "multimenu05";
+
+Deretter, i samme fil, finner du linjene:
+$modversion['blocks'][4]['file'] = "multimenu.php";
+$modversion['blocks'][4]['name'] = _IM_MULTIMENU_NAME_04;
+$modversion['blocks'][4]['description'] = "link menu";
+$modversion['blocks'][4]['show_func'] = "multimenu_show";
+$modversion['blocks'][4]['edit_func'] = "multimenu_edit";
+$modversion['blocks'][4]['options'] = "ol|0|1|weight ASC|255|2|90|160|04";
+$modversion['blocks'][4]['template'] = 'multimenu_block_04.html';
+
+Kopièr dem, lim dem inn og forandre kopien som følger:
+$modversion['blocks'][5]['file'] = "multimenu.php";
+$modversion['blocks'][5]['name'] = _IM_MULTIMENU_NAME_05;
+$modversion['blocks'][5]['description'] = "link menu";
+$modversion['blocks'][5]['show_func'] = "multimenu_show";
+$modversion['blocks'][5]['edit_func'] = "multimenu_edit";
+$modversion['blocks'][5]['options'] = "ol|0|1|weight ASC|255|2|90|160|05";
+$modversion['blocks'][5]['template'] = 'multimenu_block_05.html';
+
+NB : Vær oppmerksom på byttet av verdien '..|04' til '..|05' på slutten av linjen '$modversion['blocks'][5]['options']'. Dette er meget viktig!
+
+Nå hev nummeret i følgende blokker :
+
+$modversion['blocks'][5]['file'] = "multimenu_add.php";
+$modversion['blocks'][5]['name'] = _IM_MULTIMENU_NAME_A;
+$modversion['blocks'][5]['description'] = "link menu";
+$modversion['blocks'][5]['show_func'] = "multimenu_add_show";
+$modversion['blocks'][5]['edit_func'] = "multimenu_add_edit";
+$modversion['blocks'][5]['options'] = "menu|0|1|weight ASC|255|2|90|160|01";
+$modversion['blocks'][5]['template'] = 'multimenu_block_A.html';
+
+$modversion['blocks'][6]['file'] = "multimenu_add.php";
+$modversion['blocks'][6]['name'] = _IM_MULTIMENU_NAME_B;
+$modversion['blocks'][6]['description'] = "link menu";
+$modversion['blocks'][6]['show_func'] = "multimenu_add_show";
+$modversion['blocks'][6]['edit_func'] = "multimenu_add_edit";
+$modversion['blocks'][6]['options'] = "menu|0|1|weight ASC|255|2|90|160|01";
+$modversion['blocks'][6]['template'] = 'multimenu_block_B.html';
+ 
+
+4) Språk
+
+Endre filen /xoops/modules/multiMenu/language/french/modinfo.php
+
+Finn følgende linje:
+define("_IM_MULTIMENU_NAME_04", "multiMenu 4");
+
+Legg til rett bak den:
+define("_IM_MULTIMENU_NAME_05", "multiMenu 5");
+
+I samme fil, finn linjen:
+define("_IM_MULTIMENU_DESC", "Permet de créer jusqu'à 4 Menus Personnalisés différents.");
+
+...og erstatt den med:
+define("_IM_MULTIMENU_DESC", "Permet de créer jusqu'à 5 Menus Personnalisés différents.");
+
+Utfør samme handling for engelsk (og eventuelt andre språk): /xoops/modules/multiMenu/language/english/modinfo.php
+
+
+5) Admin-menuyen
+
+Åpne /xoops/modules/multiMenu/admin/menu.php
+
+Finn de følgende 2 linjer: 
+$adminmenu[3]['title'] = _IM_MULTIMENU_NAME_04;
+$adminmenu[3]['link'] = "admin/index.php?Menu=04";
+
+Kopièr og lim inn rett bak:
+$adminmenu[4]['title'] = _IM_MULTIMENU_NAME_05;
+$adminmenu[4]['link'] = "admin/index.php?Menu=05";
+
+ 
+
+6) Navigasjonsmeny 
+
+Endre /xoops/modules/multiMenu/admin/index.php
+
+Finn linjen: 
+$tblcolor[1]=$tblcolor[2]=$tblcolor[3]=$tblcolor[4]="#DDE";
+
+Erstatt med:
+$tblcolor[1]=$tblcolor[2]=$tblcolor[3]=$tblcolor[4]=$tblcolor[5]="#DDE";
+
+
+Finn linjen: 
+echo "<li style="list-style: none; margin: 0; display: inline; "><a href="index.php?Menu=04" style="padding: 3px 0.5em; margin-left: 3px; border: 1px solid #778; background: ".$tblcolor[4]."; text-decoration: none; ">". _IM_MULTIMENU_NAME_04 ."</a></li>";
+
+Kopièr og lim inn som følger:
+echo "<li style="list-style: none; margin: 0; display: inline; "><a href="index.php?Menu=05" style="padding: 3px 0.5em; margin-left: 3px; border: 1px solid #778; background: ".$tblcolor[5]."; text-decoration: none; ">". _IM_MULTIMENU_NAME_05 ."</a></li>";
+
+Du er ferdig. Du må bare erstatte alle '04' med '05' og '4' med '5'.
+Dobbelsjekk for å være sikker på at du har byttet ut alle rett.
+
+
+7) Malfil
+
+Kopièr en malfil og endre navn på den.
+eks : multimenu_block_04.html -> multimenu_block_05.html
+ 
+
+8) Endelig installasjon
+
+Nå er filene dine klare, og du kan reinstallere din egendefinerte multiMenu-modul i admin-innstillingene.
+Om du har gjort alt som står her, skal du nå ha en femte multiMenu-blokk.

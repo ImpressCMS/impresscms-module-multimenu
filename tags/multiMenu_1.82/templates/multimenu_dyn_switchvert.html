@@ -1,0 +1,135 @@
+<!-- Start multiMenu <{$block.mm}> -->
+<style type="text/css">
+.menutitle {
+cursor:pointer;
+}
+
+.menutitle2 {
+cursor:cursor;
+}
+</style>
+
+<script language="JavaScript" type="text/javascript" src="<{$xoops_url}>/modules/multiMenu/script/01/menu.js"></script>
+
+<{counter start=0 print=false}>
+<{assign var=td value=-1}>
+<{assign var=top value="1"}>
+<{assign var=span value="0"}>
+<div id="masterdiv">
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td id="mainmenu" width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+<{foreach item=imenu from=$block.contents}>
+
+<{if $submenu == "0"}>
+<!-- Main link -->
+	<{assign var=td value=$td+1}>
+	<{if $td > $block.columns_limit}>
+		</td>
+		<td id="mainmenu" width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<{assign var=td value=0}>
+		<{assign var=top value="1"}>
+	<{/if}>
+
+	<{if $span == 2}></span><{/if}>
+	<{counter assign=count print=false}>
+	<{if $imenu.submenu == "1" OR $imenu.submenu == "2"}>
+		<div class="menutitle" onclick="SwitchMenu('sub<{$block.mm}><{$count}>')">
+		<a class="<{if $top == 1}>menuTop<{else}>menuMain<{/if}>" title="<{$alt_title}>">
+		<img src="<{$xoops_url}>/modules/multiMenu/script/images/arrow1.gif" align="right" alt="<{$alt_title}>"/>
+		<{$image}><{$title}>
+		</a>
+		</div>
+	<{else}>
+		<{if $linkurl}><div class="menutitle"><{else}><div class="menutitle2"><{/if}>
+		<a class="<{if $top == 1}>menuTop<{else}>menuMain<{/if}>" 
+		<{if $linkurl}><{$target}>href="<{$linkurl}>"<{/if}> title="<{$alt_title}>">
+		<{$image}><{$title}>
+		</a>
+		</div>
+	<{/if}>
+	<{assign var=top value="0"}>
+	<{assign var=span value="1"}>
+<{elseif $submenu == "1" OR $submenu == "2"}>
+<!-- Sublinks -->
+	<{if $span == 0 OR $span == 1}><span class="submenu" id="sub<{$block.mm}><{$count}>"><{/if}>
+		<a class="menuSub" <{if $linkurl}><{$target}>href="<{$linkurl}>" <{/if}>title="<{$alt_title}>">
+		<{$image}><{$title}></a>
+	<{assign var=top value="0"}>
+	<{assign var=span value="2"}>
+
+<{elseif $submenu == "3"}>
+<!-- Note -->
+		<div class="menuNote"><{$link}><{$title}><{$image}><{$a}></div>
+	<{assign var=top value="1"}>
+<{elseif $submenu == "4"}>
+<!-- Categorie -->
+	<{assign var=td value=$td+1}>
+	<{if $td > $block.columns_limit}>
+		</td>
+		<td id="mainmenu" width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<{assign var=td value=0}>
+	<{/if}>
+
+	<{if $span == 2}></span><{/if}>
+	<{assign var=span value="3"}>
+	<{assign var=top value="1"}>
+	<h3><{$link}><{$image}><{$title}><{$a}></h3>
+
+<{/if}>
+
+<{assign var=submenu 	value=$imenu.submenu}>
+<{assign var=linkurl 	value=$imenu.linkurl}>
+<{assign var=link 	value=$imenu.link}>
+<{assign var=counter 	value=$count}>
+<{assign var=target 	value=$imenu.target}>
+<{assign var=alt_title 	value=$imenu.alt_title}>
+<{assign var=image 	value=$imenu.image}>
+<{assign var=title 	value=$imenu.title}>
+<{assign var=a 		value=$imenu.a}>
+
+<{/foreach}>
+
+<{if $submenu == "0"}>
+<!-- Main link -->
+	<{if $span == 2}></span><{/if}>
+	<{counter assign=count print=false}>
+		<{if $linkurl}><div class="menutitle"><{else}><div class="menutitle2"><{/if}>
+		<a class="<{if $top == 1}>menuTop<{else}>menuMain<{/if}>" 
+		<{if $linkurl}><{$target}>href="<{$linkurl}>" <{/if}>title="<{$alt_title}>">
+		<{$image}><{$title}>
+		</a>
+		</div>
+	<{assign var=top value="0"}>
+	<{assign var=span value="1"}>
+
+<{elseif $submenu == "1" OR $submenu == "2"}>
+<!-- Sublinks -->
+	<{if $span == 0 OR $span == 1}><span class="submenu" id="sub<{$block.mm}><{$count}>"><{/if}>
+		<a class="menuSub" <{if $linkurl}><{$target}>href="<{$linkurl}>"<{/if}> title="<{$alt_title}>">
+		<{$image}><{$title}></a>
+	<{assign var=top value="0"}>
+	<{assign var=span value="2"}>
+
+<{elseif $submenu == "3"}>
+<!-- Note -->
+	<div class="menuNote"><{$link}><{$title}><{$image}><{$a}></div>
+	<{counter assign=count print=false}>
+	<{assign var=top value="1"}>
+
+<{elseif $submenu == "4"}>
+<!-- Categorie -->
+	<{if $span == 2}></span><{/if}>
+	<{assign var=span value="3"}>
+	<{assign var=top value="1"}>
+	<h3><{$link}><{$title}><{$image}><{$a}></h3>
+<{/if}>
+	<{if $span == 2}></span><{/if}>
+</td>
+</tr>
+</table>
+</div>
+
+<noscript><{include file="db:multimenu_menu.html"}></noscript>
+
+<!-- End multiMenu <{$block.mm}> -->

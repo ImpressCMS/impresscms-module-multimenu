@@ -1,0 +1,59 @@
+<!-- Start multiMenu <{$block.mm}> -->
+<{assign var=td value=-1}>
+<{if $block.marquee}>
+	<marquee <{$block.marquee}> scrollamount="<{$block.marquee_delay}>" scrolldelay="60" height="<{$block.marquee_height}>" onmouseover="this.stop()" onmouseout="this.start()">
+      <{/if}>
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+
+<{assign var=ul_main value=0}><{assign var=ul_sec  value=0}>
+<{foreach item=imenu from=$block.contents}>
+
+<{if $imenu.submenu == 0}>
+<{if $ul_sec == 1}></<{$block.format}>><{assign var=ul_sec value=0}><{/if}>
+	<{assign var=td value=$td+1}>
+	<{if $td > $block.columns_limit}>
+<{if $ul_main == 1}></<{$block.format}>><{assign var=ul_main value=0}><{/if}>
+		</td>
+	<!-- New Column --> 
+		<td width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<{assign var=td value=0}>
+		<{assign var=top value="1"}>
+	<{/if}>
+<{if $ul_main == 0}><<{$block.format}>><{assign var=ul_main value=1}><{/if}>
+	<li><{$imenu.link}><{$imenu.image}><{$imenu.title}><{$imenu.a}></li>
+
+<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+<{if $ul_sec == 0}><<{$block.format}>><{assign var=ul_sec value=1}><{/if}>
+		
+	<li><{$imenu.link}><{$imenu.image}><{$imenu.title}><{$imenu.a}></li>
+
+<{elseif $imenu.submenu == 3}>
+<{if $ul_main == 1}></<{$block.format}>><{assign var=ul_main value=0}><{/if}>
+<{if $ul_sec == 1}></<{$block.format}>><{assign var=ul_sec  value=0}><{/if}>
+	<{$imenu.link}><{$imenu.image}><{$imenu.title}><{$imenu.a}></p>
+
+<{elseif $imenu.submenu == 4}>
+<{if $ul_main == 1}></<{$block.format}>><{assign var=ul_main value=0}><{/if}>
+<{if $ul_sec == 1}></<{$block.format}>><{assign var=ul_sec  value=0}><{/if}>
+	<{assign var=td value=$td+1}>
+	<{if $td > $block.columns_limit}>
+		</td>
+		<!-- New Column --> 
+		<td width="<{if $block.columns>1}><{math equation="x/y" x=100 y=$block.columns }><{else}>100<{/if}>%">
+		<{assign var=td value=0}>
+		<{assign var=top value="1"}>
+	<{/if}>
+	<{$imenu.link}><{$imenu.image}><h3><{$imenu.title}></h3><{$imenu.a}>
+<{/if}>
+<{/foreach}>
+	<{if $ul_main == 1}></<{$block.format}>><{/if}>
+	<{if $ul_sec == 1}></<{$block.format}>><{/if}>
+</td>
+<tr>
+</table>
+<{if $block.marquee}>
+	</marquee>
+<{/if}>
+<!-- End multiMenu <{$block.mm}> -->

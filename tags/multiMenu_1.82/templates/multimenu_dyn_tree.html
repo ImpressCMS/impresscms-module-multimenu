@@ -1,0 +1,47 @@
+<!-- Start multiMenu <{$block.mm}> -->
+<!-- thanks to Hans Bauer who permits us to use his treemenu -->
+<!-- http://www.h-bauer.de/index.html?treemenu,eng -->
+<script type="text/javascript">
+var url="<{$xoops_url}>/modules/multiMenu/script/10/<{if $block.block_size < 0}>black_right_gif<{else}>black_gif<{/if}>/" 
+</script>
+
+<link   rel= "stylesheet"   type="text/css"   href="<{$xoops_url}>/modules/multiMenu/script/10/css/treemenu.css" />
+<link   rel= "stylesheet"   type="text/css"   href="<{$xoops_url}>/modules/multiMenu/script/10/css/config.css" />
+<link   rel= "stylesheet"   type="text/css"   href="<{$xoops_url}>/modules/multiMenu/script/10/css/menu.css" />
+<script type="text/javascript" src="<{$xoops_url}>/modules/multiMenu/script/10/js/treemenu.js"></script>
+<script type="text/javascript" src="<{$xoops_url}>/modules/multiMenu/script/10/js/config.js"></script>
+
+<div align="<{if $block.block_size > 0}>left<{else}>right<{/if}>">
+<table <{if $block.block_size < 0}>dir="rtl"<{/if}> cellspacing="0" cellpadding="0">
+<tr>
+<td>
+
+<script type="text/javascript">
+<!--
+tree<{$block.mm}> = new treemenu('tree<{$block.mm}>', true, true, true, false);
+
+<{assign var=put_tree  value=0}>
+<{foreach item=imenu from=$block.contents}>
+<{if $imenu.submenu == 0 AND $put_tree == 0}>
+   tree<{$block.mm}>.add(1,'<{$imenu.title}>', '<{$imenu.target_context}>','<{$imenu.linkurl}>','<{$imenu.alt_title}>', <{if $imenu.image}>'<{$imenu.imageurl}>'<{else}>''<{/if}>, <{if $imenu.image}>'<{$imenu.imageurl}>'<{else}>''<{/if}>);
+   <{assign var=put_tree  value=1}>
+	<{elseif $imenu.submenu == 0 AND $put_tree == 1 }>
+    tree<{$block.mm}>.add(0,' <{$imenu.title}>','<{$imenu.target_context}>','<{$imenu.linkurl}>','<{$imenu.alt_title}>', <{if $imenu.image}>'<{$imenu.imageurl}>'<{else}>''<{/if}>, <{if $imenu.image}>'<{$imenu.imageurl}>'<{else}>''<{/if}>);
+	<{elseif $imenu.submenu == 1 OR $imenu.submenu == 2}>
+   tree<{$block.mm}>.add(0,'  <{$imenu.title}>','<{$imenu.target_context}>','<{$imenu.linkurl}>','<{$imenu.alt_title}>', <{if $imenu.image}>'<{$imenu.imageurl}>'<{else}>''<{/if}>, <{if $imenu.image}>'<{$imenu.imageurl}>'<{else}>''<{/if}>);
+	<{elseif $imenu.submenu == 4 OR $imenu.submenu == 3}>
+    <{assign var=put_tree  value=0}>
+<{/if}>
+<{/foreach}>
+document.write(tree<{$block.mm}>);
+//-->
+</script>
+
+</td>
+</tr>
+</table>
+</div>
+
+<noscript><{include file="db:multimenu_menu.html"}></noscript>
+
+<!-- End multiMenu <{$block.mm}> -->

@@ -1,0 +1,84 @@
+/* * * *
+ *
+ *   Menu dynamique multi-niveaux
+ *   Version 2.0
+ *   Par Raphael Wils
+ *   Email : info@r-wils.com
+ *   web site : www.r-wils.com
+ *
+ * * * */
+
+/* --------------------- styles par défaut  ------------------ */
+
+#menu{
+}
+
+#menu p{
+}
+
+/* styles avec javascript
+   .jav : classe affectée au conteneur #menu par le script
+--------------------------------------------------------------- */
+
+#menu.jav{
+	position:relative;
+}
+.jav, .jav ul, .jav li, .jav a{
+	width: 170px;                   /* * * LARGEUR DU MENU * * */
+	list-style:none;
+}
+.jav ul ul, .jav ul ul li, .jav ul ul a{
+	width:170px;                  /* * * LARGEUR DES SOUS MENUS * * */
+}
+.jav p{
+	clear:both;
+}
+.jav ul ul{
+	position:absolute;
+	visibility:hidden;
+	left:93%;
+}
+.jav li{
+	float:left; /* pour IEwindows */
+	clear:both;
+}
+
+html>body .jav li{float:none;}
+
+.jav a{
+	float:right;
+}
+
+
+/* le span dont il est question dans ce qui suit est ajouté par
+   le javascript.
+   ---------------------------------------------------------- */
+
+.jav span{
+	display:normal;
+	/* la valeur 12px est égale à la largeur des fleches,
+	cela évite que le texte ne se superpose à la fleche */
+	cursor:pointer;
+	height:1%; /* pour IEwindows. Etale la zone sensible
+		          à tout le span et non plus seulement au texte */
+}
+
+
+/* menu normal avec une fleche (fleche grise dans l'exemple) */
+.jav a.fleche{
+	background: url(images/arrow2.gif) no-repeat right;
+}
+
+/* menu avec une fleche dont le sous menu est visible 
+	(fond orange clair et fleche rouge dans l'exemple) */
+.jav a.flecheActive{
+	background: url(images/arrow1.gif) no-repeat right;
+}
+
+/* menu pointé (fond orange vif dans l'exemple) */
+
+.jav a.flecheActive:hover,
+.jav a.flecheActive:focus,
+.jav a.flecheActive:active{
+	background: url(images/arrow1.gif) no-repeat right;
+}

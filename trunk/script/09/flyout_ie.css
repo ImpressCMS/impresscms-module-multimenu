@@ -1,0 +1,30 @@
+.menuvcss ul li a.hide, .menuvcss ul li a:visited.hide {display:none;}
+.menuvcss ul li a:hover ul li a.hide {display:none;}
+
+.menuvcss ul li a:hover {color:#fff; background:#36f;}
+.menuvcss ul li a:hover ul {display:block; position:absolute; top:0; }
+.menuvcss ul li a:hover ul li a.sub {background:#6a3; color:#fff;}
+.menuvcss ul li a:hover ul li a {display:block; background:#eee; color:#000;}
+.menuvcss ul li a:hover ul li a ul {visibility:hidden;}
+.menuvcss ul li a:hover ul li a:hover {background:#6fc; color:#000;}
+.menuvcss ul li a:hover ul li a:hover ul {visibility:visible; position:absolute; top:0; color:#000; }
+
+.menuvcss ul li a:hover ul li a.cat {
+background:#ffffff; 
+color:red;
+}
+
+.menuvcss ul li a:hover ul li a.cat:hover {
+background:#ffffff; 
+color:blue;
+}
+
+.menuvcss ul li a:hover ul li a.note {
+background:#ffffff; 
+color:green;
+}
+
+.menuvcss ul li a:hover ul li a.note:hover {
+background:#ffffff; 
+color:blue;
+}

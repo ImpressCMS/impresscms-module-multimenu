@@ -1,0 +1,16 @@
+#context_menu{
+	padding: 0px;
+	margin: 0px;
+}
+
+.skin {
+visibility: hidden;
+position: absolute;
+}
+
+#context_menu.skin a {
+color: #000000;
+background-color: #FFE7B5;
+cursor:pointer;
+font-size:12px;
+}

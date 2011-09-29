@@ -1,0 +1,199 @@
+/*
+Menu related selectors
+*/
+.jsdomenudiv {
+	background-color: #CCCCCC;
+	border: 2px outset;
+	cursor: pointer;
+	border-bottom-color: #000000;
+	border-left-color: #FFFFFF;
+	border-right-color: #000000;
+	border-top-color: #FFFFFF;
+	cursor: default;
+	position: absolute; /* Do not alter this line! */
+	visibility: hidden;
+	z-index: 10;
+	line-height: 100%;
+}
+
+.jsdomenuitem {
+	background-color: transparent;
+	border: none;
+	color: #000000;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitemb {
+	background-color: transparent;
+	border: none;
+	color: #000000;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitem3 {
+	background-color: transparent;
+	border: none;
+	color: #000000;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitem3b {
+	background-color: transparent;
+	border: none;
+	color: #000000;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitem4 {
+	background-color: transparent;
+	border: none;
+	color: #000000;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitem4b {
+	background-color: transparent;
+	border: none;
+	color: #000000;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitemover {
+	background-color: #000099;
+	border: none;
+	color: #FFFFFF;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitemoverb {
+	background-color: #000099;
+	border: none;
+	color: #FFFFFF;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitemover3b {
+	background-color: #000099;
+	border: none;
+	cursor: default;
+	color: #FFFFFF;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitemover4 {
+	background-color: #000099;
+	border: none;
+	color: #FFFFFF;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuitemover4b {
+	background-color: #000099;
+	border: none;
+	color: #FFFFFF;
+	cursor: default;
+	font-family: Tahoma, Helvetica, sans, Arial, sans-serif;
+	font-size: 12px;
+	padding-bottom: 2px;
+	padding-left: 22px;
+	padding-right: 15px;
+	padding-top: 2px;
+	position: relative; /* Do not alter this line! */
+	line-height: 100%;
+}
+
+.jsdomenuarrow {
+	background-image: url(classic_arrow.png);
+	background-repeat: no-repeat; /* Do not alter this line! */
+	height: 7px;
+	position: absolute; /* Do not alter this line! */
+	right: 8px;
+	width: 4px;
+}
+
+.jsdomenuarrowover {
+	background-image: url(classic_arrow_o.png);
+	background-repeat: no-repeat; /* Do not alter this line! */
+	height: 7px;
+	position: absolute; /* Do not alter this line! */
+	right: 8px;
+	width: 4px;
+}
+
+.jsdomenusep {
+}
+
+.jsdomenusep hr {
+	text-align: center;
+	width: 95%;
+}
